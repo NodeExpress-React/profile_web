@@ -1,2 +1,2 @@
-# web_app_prof
+# profile_web
 Aplicação feita em ReactJS
