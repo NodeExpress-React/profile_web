@@ -1,15 +1,16 @@
 import React from "react";
 
 interface InputProps {
-  id: string;
   type: string;
   placeholder: string;
+  register: any;
+  name: string;
 }
 
-const Input: React.FC<InputProps> = ({ id, type, placeholder }) => (
-  <label htmlFor={id}>
+const Input: React.FC<InputProps> = ({ type, placeholder, register, name }) => (
+  <label>
     <input
-      id={id}
+      {...register(name, { required: true })}
       type={type}
       placeholder={placeholder}
       className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none"
