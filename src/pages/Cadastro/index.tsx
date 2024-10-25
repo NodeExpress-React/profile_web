@@ -10,7 +10,7 @@ function Cadastro() {
 
   const onSubmit = async (data: any) => {
     try {
-      await api.post("/cadastro", {
+      await api.post("/usuarios/cadastro", {
         name: data.name,
         email: data.email,
         password: data.password,

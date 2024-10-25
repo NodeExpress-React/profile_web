@@ -10,11 +10,11 @@ function Login() {
 
   const onSubmit = async (data: any) => {
     try {
-      const { data: token } = await api.post("/login", {
+      const { data: token } = await api.post("/usuarios/login", {
         email: data.email,
         password: data.password,
       });
-      localStorage.setItem("token", token);
+      sessionStorage.setItem("token", token);
 
       navigate("/perfil");
     } catch (err) {
