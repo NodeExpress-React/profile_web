@@ -6,6 +6,7 @@ export default {
       backgroundImage: {
         "bg-cad": "url('./assets/bg-cad.png')",
         "bg-log": "url('./assets/bg-log.jpg')",
+        "bg-per": "url('./assets/bg-per.jpg')",
       },
     },
   },
