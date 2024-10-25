@@ -35,12 +35,12 @@ function stringAvatar(name: string) {
 }
 
 interface User {
-  name: string;
   email: string;
+  name: string;
 }
 
 function Perfil() {
-  const [userProfile, setUserProfile] = React.useState<User[]>([]);
+  const [userProfile, setUserProfile] = React.useState<User>();
 
   React.useEffect(() => {
     async function loadUser() {
@@ -49,8 +49,8 @@ function Perfil() {
           headers: { Authorization: `Bearer ${sessionStorage.getItem("token")}` },
         });
 
-        const { user } = response.data;
-        setUserProfile(Array.isArray(user) ? user : [user]);
+        const user: User = response.data.user;
+        setUserProfile(user);
       } catch (error) {
         console.error("Erro ao carregar o perfil do usuário:", error);
       }
@@ -63,20 +63,18 @@ function Perfil() {
     <section className="w-screen h-screen bg-bg-per bg-cover bg-center flex flex-row">
       <div className="w-6/12 h-full bg-white shadow-xl flex flex-col gap-20 items-center justify-center">
         <Box component="form" sx={{ "& > :not(style)": { m: 1, width: "25ch" } }} noValidate autoComplete="off">
-          {userProfile.length > 0 ? (
-            userProfile.map((user: User) => (
-              <ul key={user.email} className="flex flex-col gap-6">
-                <Stack>
-                  <Avatar {...stringAvatar(user.name)} />
-                </Stack>
-                <li>
-                  <TextField id={`name-${user.name}`} disabled label="Nome de Usuário" defaultValue={user.name} variant="outlined" />
-                </li>
-                <li>
-                  <TextField id={`name-${user.email}`} disabled label="Email" defaultValue={user.email} variant="outlined" />
-                </li>
-              </ul>
-            ))
+          {userProfile ? (
+            <ul key={userProfile.email} className="flex flex-col gap-6">
+              <Stack>
+                <Avatar {...stringAvatar(userProfile.name)} />
+              </Stack>
+              <li>
+                <TextField id={`name-${userProfile.name}`} disabled label="Nome de Usuário" defaultValue={userProfile.name} variant="outlined" />
+              </li>
+              <li>
+                <TextField id={`name-${userProfile.email}`} disabled label="Email" defaultValue={userProfile.email} variant="outlined" />
+              </li>
+            </ul>
           ) : (
             <p>Carregando informações do usuário...</p>
           )}
