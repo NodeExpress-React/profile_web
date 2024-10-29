@@ -29,6 +29,9 @@ function stringAvatar(name: string) {
   return {
     sx: {
       bgcolor: stringToColor(name),
+      width: 72,
+      height: 72,
+      fontSize: 40,
     },
     children: `${nameParts[0][0]}${nameParts[1] ? nameParts[1][0] : ""}`,
   };
@@ -62,18 +65,21 @@ function Perfil() {
   return (
     <section className="w-screen h-screen bg-bg-per bg-cover bg-center flex flex-row">
       <div className="w-6/12 h-full bg-white shadow-xl flex flex-col gap-20 items-center justify-center">
-        <Box component="form" sx={{ "& > :not(style)": { m: 1, width: "25ch" } }} noValidate autoComplete="off">
+        <Box component="form" className="w-full m-4 h-[40ch]" noValidate autoComplete="off">
           {userProfile ? (
-            <ul key={userProfile.email} className="flex flex-col gap-6">
-              <Stack>
-                <Avatar {...stringAvatar(userProfile.name)} />
-              </Stack>
-              <li>
-                <TextField id={`name-${userProfile.name}`} disabled label="Nome de Usuário" defaultValue={userProfile.name} variant="outlined" />
-              </li>
-              <li>
-                <TextField id={`name-${userProfile.email}`} disabled label="Email" defaultValue={userProfile.email} variant="outlined" />
-              </li>
+            <ul key={userProfile.email} className="flex flex-col items-center justify-center gap-25 h-full">
+              <h1 className="text-3xl">Bem-Vindo de volta!</h1>
+              <div className="flex flex-col gap-5">
+                <Stack>
+                  <Avatar {...stringAvatar(userProfile.name)} />
+                </Stack>
+                <li>
+                  <TextField id={`name-${userProfile.name}`} disabled label="Nome de Usuário" defaultValue={userProfile.name} variant="outlined" />
+                </li>
+                <li>
+                  <TextField id={`name-${userProfile.email}`} disabled label="Email" defaultValue={userProfile.email} variant="outlined" />
+                </li>
+              </div>
             </ul>
           ) : (
             <p>Carregando informações do usuário...</p>
